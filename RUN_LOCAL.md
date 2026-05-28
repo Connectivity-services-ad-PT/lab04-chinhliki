@@ -1,4 +1,4 @@
-# RUN_LOCAL.md – Hướng dẫn chạy Lab 04
+# RUN_LOCAL.md – Hướng dẫn chạy Lab 04 (Core Business Policy Engine)
 
 Tài liệu này giúp người khác clone repo sạch và chạy lại service trong Docker.
 
@@ -24,7 +24,7 @@ npm install
 ## 3. Build Docker image
 
 ```bash
-docker build -t fit4110/iot-ingestion:lab04 .
+docker build -t fit4110/core-business:lab04 .
 ```
 
 ---
@@ -33,10 +33,10 @@ docker build -t fit4110/iot-ingestion:lab04 .
 
 ```bash
 docker run --rm \
-  --name fit4110-iot-lab04 \
+  --name fit4110-core-lab04 \
   -p 8000:8000 \
   --env-file .env.example \
-  fit4110/iot-ingestion:lab04
+  fit4110/core-business:lab04
 ```
 
 Mở terminal khác, kiểm tra:
@@ -49,9 +49,8 @@ Kết quả mong đợi:
 
 ```json
 {
-  "status": "ok",
-  "service": "iot-ingestion",
-  "version": "0.4.0"
+  "status": "UP",
+  "timestamp": "2026-05-28T10:30:00Z"
 }
 ```
 
@@ -59,7 +58,13 @@ Kết quả mong đợi:
 
 ## 5. Chạy Newman test trên container
 
+Để chạy đầy đủ bộ test (bao gồm cả smoke test gọi sang mock service của nhóm B3 Access Gate), bạn cần chạy thêm mock server cho Access Gate trước:
+
 ```bash
+# Terminal 1: Chạy Mock Server cho Access Gate
+npm run mock:gate
+
+# Terminal 2: Chạy Newman test
 npm run test:local
 ```
 
@@ -77,7 +82,7 @@ reports/newman-lab04-local.html
 Nếu không dùng `--rm` hoặc container còn chạy:
 
 ```bash
-docker stop fit4110-iot-lab04
+docker stop fit4110-core-lab04
 ```
 
 ---

@@ -1,5 +1,5 @@
-IMAGE_NAME ?= fit4110/iot-ingestion:lab04
-CONTAINER_NAME ?= fit4110-iot-lab04
+IMAGE_NAME ?= fit4110/core-business:lab04
+CONTAINER_NAME ?= fit4110-core-lab04
 PORT ?= 8000
 
 install:
@@ -9,7 +9,7 @@ lint:
 	npm run lint:openapi
 
 mock:
-	npm run mock:iot
+	npm run mock:core
 
 test-mock:
 	npm run test:mock
