@@ -31,7 +31,7 @@ jobs:
           nohup npx prism mock contracts/access-gate.openapi.yaml --port 4011 --host 0.0.0.0 > gate.log 2>&1 &
 
       - name: Wait for Access Gate mock
-        run: npx wait-on tcp:localhost:4011 --timeout 30000
+        run: npx wait-on tcp:127.0.0.1:4011 --timeout 60000
 
       - name: Run Docker container
         run: |
@@ -42,7 +42,7 @@ jobs:
             fit4110/core-business:lab04
 
       - name: Wait for service health
-        run: npx wait-on http://localhost:8000/health --timeout 30000
+        run: npx wait-on http://127.0.0.1:8000/health --timeout 60000
 
       - name: Run Newman against Docker container
         run: npm run test:local
