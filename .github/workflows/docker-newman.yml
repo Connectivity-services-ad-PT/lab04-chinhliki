@@ -38,7 +38,11 @@ jobs:
           docker run -d --rm \
             --name fit4110-core-lab04 \
             -p 8000:8000 \
-            --env-file .env.example \
+            -e APP_HOST=0.0.0.0 \
+            -e APP_PORT=8000 \
+            -e AUTH_TOKEN=local-dev-token-real \
+            -e SERVICE_NAME=core-business \
+            -e SERVICE_VERSION=1.0.0 \
             fit4110/core-business:lab04
 
       - name: Wait for service health
